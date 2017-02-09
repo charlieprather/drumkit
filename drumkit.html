@@ -31,7 +31,7 @@
     </div>
     <div data-key="72" class="key">
       <kbd>H</kbd>
-      <span class="sound">ride</span>
+      <span class="sound">deep boom</span>
     </div>
     <div data-key="74" class="key">
       <kbd>J</kbd>
@@ -52,12 +52,14 @@
   <audio data-key="68" src="sounds/kick.wav"></audio>
   <audio data-key="70" src="sounds/openhat.wav"></audio>
   <audio data-key="71" src="sounds/boom.wav"></audio>
-  <audio data-key="72" src="sounds/ride.wav"></audio>
+  <audio data-key="72" src="sounds/big-burundi-29.wav"></audio>
   <audio data-key="74" src="sounds/snare.wav"></audio>
   <audio data-key="75" src="sounds/tom.wav"></audio>
   <audio data-key="76" src="sounds/tink.wav"></audio>
 
 <script>
+
+
 
 window.addEventListener('keydown', function(e){
   const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
@@ -67,13 +69,16 @@ window.addEventListener('keydown', function(e){
   audio.currentTime = 0;//this is the rewind element - so it starts over to play each time pressed
   audio.play();
   key.classList.add('playing');
-    key.classList.remove('playing');
-
-  key.classList.toggle('playing');
-
-
-
 });
+
+function removeTransition(e){
+if (e.propertyName !== 'transform') return; // skip it if it's not a transform
+this.classList.remove('playing');
+}
+
+  const keys = document.querySelectorAll('.key');
+  keys.forEach(key => key.addEventListener('transitionend', removeTransition));
+  
 
 
 
